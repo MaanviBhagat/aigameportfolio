@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maanvi Bhagat — Character Record</title>
+<style>
+  :root {
+    --void: #0f0a1e;
+    --panel: #1c1433;
+    --panel-2: #241a42;
+    --panel-edge: #3d2f66;
+    --gold: #d9b354;
+    --gold-dim: #8a7333;
+    --arcane: #5fd9c9;
+    --ink: #f1e9d8;
+    --muted: #a99ecb;
+    --ember: #e2703a;
+    --common: #8a97a8;
+    --rare: #4fa7d9;
+    --epic: #a06fe0;
+    --legendary: #d9b354;
+    --hp: #3fd67a;
+    --hp-dim: #234a35;
+    --font-display: Georgia, 'Times New Roman', serif;
+    --font-body: 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'Courier New', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--void);
+    color: var(--ink);
+    font-family: var(--font-body);
+    min-height: 100%;
+  }
+  body {
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(217,179,84,0.5) 0, transparent 100%),
+      radial-gradient(1px 1px at 80% 10%, rgba(95,217,201,0.4) 0, transparent 100%),
+      radial-gradient(1px 1px at 60% 70%, rgba(217,179,84,0.35) 0, transparent 100%),
+      radial-gradient(1px 1px at 30% 85%, rgba(95,217,201,0.3) 0, transparent 100%),
+      radial-gradient(1px 1px at 90% 50%, rgba(217,179,84,0.3) 0, transparent 100%),
+      radial-gradient(1px 1px at 45% 40%, rgba(255,255,255,0.25) 0, transparent 100%),
+      radial-gradient(ellipse at 50% -10%, rgba(95,217,201,0.10), transparent 55%),
+      radial-gradient(ellipse at 90% 110%, rgba(217,179,84,0.08), transparent 55%);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  a { color: inherit; }
+
+  /* ---------- top nav ---------- */
+  header.topnav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 28px;
+    background: rgba(15,10,30,0.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--panel-edge);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-display);
+    font-weight: bold;
+    letter-spacing: 0.03em;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .brand .sigil {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--arcane), var(--panel-2) 70%);
+    border: 1px solid var(--gold-dim);
+    box-shadow: 0 0 14px rgba(95,217,201,0.5);
+  }
+  nav.tabs {
+    display: flex; gap: 6px;
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 999px;
+    padding: 4px;
+  }
+  nav.tabs button {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    padding: 9px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  nav.tabs button.active {
+    background: linear-gradient(135deg, var(--gold), #b5893a);
+    color: #241a06;
+  }
+  nav.tabs button:not(.active):hover { color: var(--ink); }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 48px 24px 100px; }
+  .page { display: none; animation: fadeIn 0.5s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity:1; transform: translateY(0);} }
+
+  /* ================= CHARACTER PAGE ================= */
+  .sheet {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 780px) { .sheet { grid-template-columns: 1fr; } }
+
+  .trailer-block {
+    background: linear-gradient(160deg, var(--panel-2), var(--panel) 70%);
+    border: 1px solid var(--panel-edge);
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .trailer-block .trailer-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .trailer-block .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--arcane);
+  }
+  .trailer-block h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin: 2px 0 0;
+    color: var(--ink);
+  }
+  .trailer-block .tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    border-radius: 999px;
+    padding: 3px 12px;
+    white-space: nowrap;
+    align-self: center;
+  }
+  .trailer-frame {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--panel-edge);
+    background: #000;
+  }
+  .trailer-frame video {
+    display: block;
+    width: 100%;
+    max-height: 520px;
+    background: #000;
+  }
+
+  .portrait-card {
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--panel-edge);
+    border-radius: 16px;
+    padding: 26px 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .avatar-ring {
+    width: 150px; height: 150px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--gold), var(--arcane), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 30px rgba(217,179,84,0.35);
+  }
+  .avatar-inner {
+    width: 138px; height: 138px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 25%, #362a5c, #14102a 75%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.2rem;
+  }
+  .char-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin: 4px 0 2px;
+  }
+  .char-class {
+    font-size: 0.8rem;
+    color: var(--arcane);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .char-level {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    border-radius: 999px;
+    padding: 3px 12px;
+    margin-bottom: 18px;
+  }
+  .trait-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .trait-chip {
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 10px;
+    padding: 10px 12px;
+    width: 108px;
+    text-align: center;
+  }
+  .trait-chip .icon { font-size: 1.4rem; }
+  .trait-chip .label { font-size: 0.72rem; color: var(--ink); margin-top: 4px; font-weight: 600; }
+  .trait-chip .flavor { font-size: 0.62rem; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+
+  .stats-col { display: flex; flex-direction: column; gap: 18px; }
+  .stat-block {
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .stat-block h3 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .stat-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .stat-entry:first-of-type { border-top: none; }
+  .stat-entry .name { font-size: 0.95rem; color: var(--ink); font-weight: 600; }
+  .stat-entry .meta { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .stat-entry .year {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--arcane);
+    white-space: nowrap;
+  }
+
+  .bio-block {
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 14px;
+    padding: 22px 24px;
+  }
+  .bio-block h3 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 10px;
+  }
+  .bio-block p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  /* ================= MARKETPLACE PAGE ================= */
+  .market-header { text-align: center; margin-bottom: 8px; }
+  .market-header .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--arcane);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .market-header h1 {
+    font-family: var(--font-display);
+    font-size: 2.1rem;
+    color: var(--ink);
+    margin: 6px 0 8px;
+  }
+  .market-header p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    max-width: 480px;
+    margin: 0 auto 36px;
+  }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 22px;
+  }
+
+  .trailer-banner {
+    max-width: 860px;
+    margin: 0 auto 46px;
+  }
+  .trailer-frame {
+    position: relative;
+    border-radius: 16px;
+    padding: 3px;
+    background: conic-gradient(from 0deg, var(--gold), var(--arcane), var(--epic), var(--gold));
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  }
+  .trailer-frame video {
+    display: block;
+    width: 100%;
+    border-radius: 14px;
+    background: #000;
+    color-scheme: dark;
+  }
+  .trailer-caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .trailer-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--arcane);
+    border: 1px solid var(--panel-edge);
+    border-radius: 999px;
+    padding: 4px 12px;
+  }
+  .trailer-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .gcard {
+    position: relative;
+    background: linear-gradient(160deg, var(--panel-2), var(--panel) 70%);
+    border: 1px solid var(--panel-edge);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .gcard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 44px rgba(0,0,0,0.5);
+  }
+  .gcard[data-rarity="legendary"]:hover { border-color: var(--legendary); }
+  .gcard[data-rarity="epic"]:hover { border-color: var(--epic); }
+  .gcard[data-rarity="rare"]:hover { border-color: var(--rare); }
+
+  .gcard .rarity-ribbon {
+    position: absolute; top: 14px; right: -34px;
+    transform: rotate(45deg);
+    width: 130px;
+    text-align: center;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 0;
+    color: #1a1428;
+  }
+  .gcard[data-rarity="legendary"] .rarity-ribbon { background: var(--legendary); }
+  .gcard[data-rarity="epic"] .rarity-ribbon { background: var(--epic); color: #f4ecff; }
+  .gcard[data-rarity="rare"] .rarity-ribbon { background: var(--rare); color: #08202f; }
+
+  .gcard .medallion-wrap {
+    display: flex; align-items: center; justify-content: center;
+    padding: 30px 20px 14px;
+  }
+  .medallion {
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.1rem;
+    border: 2px solid var(--gold-dim);
+  }
+  .gcard[data-rarity="legendary"] .medallion { background: radial-gradient(circle at 35% 30%, #4a3c1a, #1c1633); box-shadow: 0 0 26px rgba(217,179,84,0.45); }
+  .gcard[data-rarity="epic"] .medallion { background: radial-gradient(circle at 35% 30%, #382a5c, #1c1633); box-shadow: 0 0 26px rgba(160,111,224,0.4); }
+  .gcard[data-rarity="rare"] .medallion { background: radial-gradient(circle at 35% 30%, #1c3d4c, #1c1633); box-shadow: 0 0 26px rgba(79,167,217,0.4); }
+
+  .gcard .body { padding: 0 22px; flex: 1; text-align: center; }
+  .gcard .type-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .gcard h2 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .gcard .desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 16px;
+    min-height: 58px;
+  }
+
+  .ability-bar-wrap { margin-bottom: 18px; }
+  .ability-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .pip-row { display: flex; gap: 5px; justify-content: center; }
+  .pip {
+    width: 100%;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--hp-dim);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .pip.filled {
+    background: linear-gradient(180deg, #6dffa8, var(--hp));
+    box-shadow: 0 0 8px rgba(63,214,122,0.6);
+    border-color: rgba(63,214,122,0.5);
+  }
+
+  .gcard .footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 22px;
+    border-top: 1px solid var(--panel-edge);
+    background: rgba(0,0,0,0.15);
+  }
+  .price-tag { display: flex; flex-direction: column; }
+  .price-tag .free { font-family: var(--font-display); font-weight: bold; color: var(--gold); font-size: 1.05rem; }
+  .price-tag .gald { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); }
+  .summon-btn {
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .summon-btn:hover { background: var(--gold); color: #1a1428; border-color: var(--gold); }
+
+  footer.sitefoot {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.75rem;
+    padding: 30px 0 10px;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="brand"><span class="sigil"></span> Maanvi Bhagat</div>
+  <nav class="tabs">
+    <button class="active" data-page="character">📜 Character Sheet</button>
+    <button data-page="market">🛒 Marketplace</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= CHARACTER PAGE ================= -->
+  <section id="character" class="page active">
+    <div class="sheet">
+      <div class="portrait-card">
+        <div class="avatar-ring"><div class="avatar-inner">🧙‍♀️</div></div>
+        <div class="char-name">Maanvi Bhagat</div>
+        <div class="char-class">Storyteller · Game Developer</div>
+        <div class="char-level">LV. ∞ — STILL LEVELING</div>
+        <div class="trait-row">
+          <div class="trait-chip">
+            <div class="icon">📖</div>
+            <div class="label">Reading</div>
+            <div class="flavor">Passive: Lore Absorption</div>
+          </div>
+          <div class="trait-chip">
+            <div class="icon">🖋️</div>
+            <div class="label">Writing</div>
+            <div class="flavor">Passive: Narrative Weaving</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-col">
+        <div class="bio-block">
+          <h3>Character Bio</h3>
+          <p>A builder of small worlds — part developer, part storyteller. Between lines of code and lines of prose,
+          I like making things that feel like they have a pulse: games with a story behind every mechanic, and stories
+          with a little bit of interactivity in their bones. Off duty, you'll find me a few chapters into a novel
+          or a few pages into writing one of my own.</p>
+        </div>
+
+        <div class="stat-block">
+          <h3>🎓 Education</h3>
+          <div class="stat-entry">
+            <div>
+              <div class="name">Bachelor of Technology — Computer Science</div>
+              <div class="meta">Core degree, engineering track</div>
+            </div>
+          </div>
+          <div class="stat-entry">
+            <div>
+              <div class="name">Honours in AR / VR</div>
+              <div class="meta">Specialization in immersive & spatial computing</div>
+            </div>
+            <div class="year">2020</div>
+          </div>
+        </div>
+
+        <div class="stat-block">
+          <h3>🏅 Certifications</h3>
+          <div class="stat-entry">
+            <div>
+              <div class="name">AI Game Design Course</div>
+              <div class="meta">Applied AI tooling for game & narrative design</div>
+            </div>
+            <div class="year">2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MARKETPLACE PAGE ================= -->
+  <section id="market" class="page">
+    <div class="market-header">
+      <div class="trailer-block">
+      <div class="trailer-head">
+        <div>
+          <div class="eyebrow">✦ Featured Showreel ✦</div>
+          <h3>Aetherium Academy: The Vaelor Trials — Trailer</h3>
+        </div>
+        <span class="tag">0:30 · SILENT-SAFE</span>
+      </div>
+      <div class="trailer-frame">
+        <video controls preload="metadata">
+          <source src="The Vaelor Trials Trailer.mp4" type="video/mp4">
+          Your browser doesn't support embedded video —
+          <a href="The Vaelor Trials Trailer.mp4">download the trailer</a> instead.
+        </video>
+      </div>
+    </div>
+      <div class="eyebrow">✦ Limited-Time Banner ✦</div>
+      <h1>The Marketplace</h1>
+      <p>Every summon here costs 0 Gald. Pull as many times as you like — all projects are free to explore.</p>
+    </div>
+    <div class="market-grid" id="market-grid"></div>
+  </section>
+
+</main>
+
+<footer class="sitefoot">Crafted in Aetherium Academy's workshop — thanks for stopping by.</footer>
+
+<script>
+const PROJECTS = [
+  {
+    title: "Bubble Artifacts",
+    type: "Utility App",
+    icon: "🫧",
+    rarity: "rare",
+    desc: "A playful mobile utility app built with Thunkable — collectible artifacts meet everyday functionality.",
+    ability: 4,
+    url: "https://ai.thunkable.com/hikari/preview/6a529387e5c5601c631b176a/7d300936-25b0-4edf-bd8c-9c5f72b0637a",
+    cta: "▶ Launch App"
+  },
+  {
+    title: "Aetherium Academy: The Vaelor Trials",
+    type: "RPG / Visual Novel",
+    icon: "⚔️",
+    rarity: "legendary",
+    desc: "A browser-based fantasy RPG — dialogue-driven story scenes woven with turn-based spellcasting combat.",
+    ability: 5,
+    url: "https://maanvibhagat.github.io/aetherium_trials/",
+    cta: "▶ Play Game"
+  },
+  {
+    title: "Aetherium Academy — The Novella",
+    type: "Story · PDF",
+    icon: "📖",
+    rarity: "epic",
+    desc: "The full prose telling of the Vaelor Trials — five chapters, illustrated chapter openers, a proper printed feel.",
+    ability: 4,
+    url: "https://maanvibhagat.github.io/aetherium_trials/Aetherium_Academy_Novella.pdf",
+    cta: "▶ Read Novella"
+  },
+  {
+    title: "Aetherium Academy — The Comic",
+    type: "Illustrated Comic",
+    icon: "🖼️",
+    rarity: "epic",
+    desc: "The same story told panel by panel — speech bubbles, captions, and hand-timed comic-book pacing.",
+    ability: 4,
+    url: "https://maanvibhagat.github.io/aetherium_trials/aetherium-comic",
+    cta: "▶ Read Comic"
+  },
+  {
+    title: "Alchemy",
+    type: "Browser Game",
+    icon: "🧪",
+    rarity: "legendary",
+    desc: "A Minecraft-inspired alchemy crafting game — mix, discover, and unlock an eleven-recipe potion chain.",
+    ability: 5,
+    url: "https://maanvibhagat.github.io/alchemy/",
+    cta: "▶ Play Game"
+  }
+];
+
+const grid = document.getElementById("market-grid");
+PROJECTS.forEach((p, i) => {
+  const pips = Array.from({length: 5}, (_, idx) =>
+    `<div class="pip ${idx < p.ability ? 'filled' : ''}"></div>`
+  ).join("");
+
+  const card = document.createElement("div");
+  card.className = "gcard";
+  card.dataset.rarity = p.rarity;
+  card.style.animationDelay = (i * 0.08) + "s";
+  card.innerHTML = `
+    <div class="rarity-ribbon">${p.rarity}</div>
+    <div class="medallion-wrap"><div class="medallion">${p.icon}</div></div>
+    <div class="body">
+      <div class="type-tag">${p.type}</div>
+      <h2>${p.title}</h2>
+      <div class="desc">${p.desc}</div>
+      <div class="ability-bar-wrap">
+        <div class="ability-label"><span>Feature Power</span><span>${p.ability}/5</span></div>
+        <div class="pip-row">${pips}</div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="price-tag"><span class="free">FREE</span><span class="gald">0 GALD</span></div>
+      <a class="summon-btn" href="${p.url}" target="_blank" rel="noopener">${p.cta}</a>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+/* ---------- tab switching ---------- */
+document.querySelectorAll("nav.tabs button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("nav.tabs button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.page).classList.add("active");
+  });
+});
+</script>
+</body>
+</html>
