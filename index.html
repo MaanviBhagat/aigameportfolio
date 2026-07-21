@@ -13,7 +13,7 @@
     --gold: #d9b354;
     --gold-dim: #8a7333;
     --arcane: #5fd9c9;
-    --ink: #f1e9d8;
+    --ink: #f1e9d8;H
     --muted: #a99ecb;
     --ember: #e2703a;
     --common: #8a97a8;
@@ -21,7 +21,7 @@
     --epic: #a06fe0;
     --legendary: #d9b354;
     --hp: #3fd67a;
-    --hp-dim: #234a35;
+    --hp-dim: #234a35;H
     --font-display: Georgia, 'Times New Roman', serif;
     --font-body: 'Segoe UI', system-ui, sans-serif;
     --font-mono: 'Courier New', ui-monospace, monospace;
@@ -283,29 +283,29 @@
     margin: 0;
   }
 
-  /* ================= MARKETPLACE PAGE ================= */
-  .market-header { text-align: center; margin-bottom: 8px; }
-  .market-header .eyebrow {
+  /* ================= Portfolio PAGE ================= */
+  .Portfolio-header { text-align: center; margin-bottom: 8px; }
+  .Portfolio-header .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--arcane);
     letter-spacing: 0.15em;
     text-transform: uppercase;
   }
-  .market-header h1 {
+  .Portfolio-header h1 {
     font-family: var(--font-display);
     font-size: 2.1rem;
     color: var(--ink);
     margin: 6px 0 8px;
   }
-  .market-header p {
+  .Portfolio-header p {
     color: var(--muted);
     font-size: 0.92rem;
     max-width: 480px;
     margin: 0 auto 36px;
   }
 
-  .market-grid {
+  .Portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
     gap: 22px;
@@ -488,7 +488,7 @@
   <div class="brand"><span class="sigil"></span> Aria</div>
   <nav class="tabs">
     <button class="active" data-page="character">📜 Character Sheet</button>
-    <button data-page="market">🛒 Marketplace</button>
+    <button data-page="Portfolio">✨ Portfolio</button>
   </nav>
 </header>
 
@@ -530,13 +530,13 @@
           <div class="stat-entry">
             <div>
               <div class="name">Grade 6 at School</div>
-              <div class="meta">AI track</div>
+              <div class="meta">Student</div>
             </div>
           </div>
           <div class="stat-entry">
             <div>
-              <div class="name">Certification in AI</div>
-              <div class="meta">Game Development</div>
+              <div class="name">AI Prompt Engineering</div>
+              <div class="meta">Certification</div>
             </div>
             <div class="year">2020</div>
           </div>
@@ -556,9 +556,9 @@
     </div>
   </section>
 
-  <!-- ================= MARKETPLACE PAGE ================= -->
-  <section id="market" class="page">
-    <div class="market-header">
+  <!-- ================= Portfolio PAGE ================= -->
+  <section id="Portfolio" class="page">
+    <div class="Portfolio-header">
       <div class="trailer-block">
       <div class="trailer-head">
         <div>
@@ -569,17 +569,17 @@
       </div>
       <div class="trailer-frame">
         <video controls preload="metadata">
-          <source src="The Vaelor Trials.mp4" type="video/mp4">
+          <source src="The Vaelor Trials Trailer.mp4" type="video/mp4">
           Your browser doesn't support embedded video —
           <a href="The Vaelor Trials Trailer.mp4">download the trailer</a> instead.
         </video>
       </div>
     </div>
       <div class="eyebrow">✦ Limited-Time Banner ✦</div>
-      <h1>The Marketplace</h1>
+      <h1>The Portfolio</h1>
       <p>Every summon here costs 0 Gald. Pull as many times as you like — all projects are free to explore.</p>
     </div>
-    <div class="market-grid" id="market-grid"></div>
+    <div class="Portfolio-grid" id="Portfolio-grid"></div>
   </section>
 
 </main>
@@ -640,7 +640,7 @@ const PROJECTS = [
   }
 ];
 
-const grid = document.getElementById("market-grid");
+const grid = document.getElementById("Portfolio-grid");
 PROJECTS.forEach((p, i) => {
   const pips = Array.from({length: 5}, (_, idx) =>
     `<div class="pip ${idx < p.ability ? 'filled' : ''}"></div>`
